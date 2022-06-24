@@ -1,0 +1,19 @@
+name: flwrap
+description: "A wrapper that allows you to use fancyline with any executable/command"
+version: 0.1.0
+
+authors:
+  - Andriamanitra
+
+dependencies:
+  fancyline:
+    github: Papierkorb/fancyline
+    version: ">= 0.4.1"
+
+targets:
+  flwrap:
+    main: src/flwrap_cli.cr
+
+crystal: ">= 1.4, < 2.0.0"
+
+license: MPL-2
