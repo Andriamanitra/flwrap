@@ -17,8 +17,8 @@ $ ./bin/flwrap --help
 ## Usage
 
 ```console
-$ flwrap sqlite3  # without completions
-$ flwrap -f completions.txt sqlite3  # with completions from file (one per line)
+$ flwrap tclsh  # without completions
+$ flwrap -f completions.txt tclsh  # with completions from file (one per line)
 ```
 
 ## Contributing
