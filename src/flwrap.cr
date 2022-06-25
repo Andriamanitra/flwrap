@@ -1,6 +1,8 @@
 # wrap arbitrary programs with fancyline
 require "fancyline"
 
+require "./rewrite_rules.cr"
+
 
 module Flwrap
   VERSION = "0.1.0"
@@ -10,6 +12,9 @@ module Flwrap
       @cmd : String,
       @args : Array(String) = [] of String,
       @completions : Array(String) = [] of String,
+      @rewrite_rules : RewriteRules = RewriteRules.new,
+      @prompt : String = "> ",
+      @read_timeout : Float32 = 0.05
     )
       @fancy = Fancyline.new
 
@@ -22,8 +27,6 @@ module Flwrap
         end
         fl_completions
       end
-      @prompt = "> "
-      @read_timeout = 0.05
     end
 
     def run()
@@ -39,7 +42,8 @@ module Flwrap
       proc.error.read_timeout = @read_timeout
       read_output(proc)
       while input = @fancy.readline(@prompt)
-        proc.input.puts(input)
+        m_input = @rewrite_rules.apply(input)
+        proc.input.puts(m_input)
         read_output(proc)
       end
     end
